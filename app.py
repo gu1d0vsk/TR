@@ -112,33 +112,21 @@ with st.sidebar:
 st.title("📄 Gerador de Termo de Referência")
 
 # --- BLOCO 1: IDENTIFICAÇÃO (UNIDADES) ---
+# --- BLOCO 1: IDENTIFICAÇÃO (UNIDADES) ---
 with st.container():
     col_dem, col_req = st.columns(2)
     
     with col_dem:
-        # Unidade Demandante (O Dono do Problema)
-        unidade_demandante = st.text_input("Unidade Demandante", placeholder="Ex: Depto. de Comunicação e Marketing")
-        st.caption("A área que possui a necessidade e receberá o objeto/serviço.")
+        # Unidade Demandante
+        unidade_demandante = st.text_input("Unidade Demandante", placeholder="Ex: Depto. de Comunicação")
         dados['unidade_demandante'] = unidade_demandante
 
     with col_req:
-        # Lógica da Unidade Requisitante (O Técnico/Intermediário)
-        tem_requisitante = st.checkbox("Incluir Unidade Requisitante Intermediária?")
+        # Unidade Requisitante (Opcional, sem explicação)
+        tem_requisitante = st.checkbox("Existe Unidade Requisitante?")
         
         if tem_requisitante:
-            # Caixa de explicação mais profissional e bonita
-            with st.expander("💡 Entenda a diferença (Demandante x Requisitante)", expanded=True):
-                st.markdown("""
-                Preencha apenas se houver uma área técnica intermediando o pedido.
-                
-                * 🏢 **Unidade Demandante:** É a "dona" da necessidade. Quem vai usufruir do bem ou serviço.
-                * ⚙️ **Unidade Requisitante:** É a área técnica ou administrativa que formaliza e operacionaliza o pedido em nome da Demandante.
-                
-                **Exemplo Prático:**
-                A *Comunicação* (Demandante) precisa enviar brindes, mas quem operacionaliza o contrato de Correios é a *Gestão Documental* (Requisitante).
-                """)
-            
-            unidade_requisitante = st.text_input("Nome da Unidade Requisitante", placeholder="Ex: Coord. de Gestão Documental")
+            unidade_requisitante = st.text_input("Nome da Unidade Requisitante", placeholder="Ex: Gestão Documental")
             dados['unidade_requisitante'] = unidade_requisitante
             dados['tem_requisitante'] = True
         else:
