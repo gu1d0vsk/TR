@@ -116,24 +116,29 @@ with st.container():
     col_dem, col_req = st.columns(2)
     
     with col_dem:
-        # Unidade Demandante agora é input livre
-        unidade_demandante = st.text_input("Unidade Demandante (Quem pede)", placeholder="Ex: Departamento de Compras")
+        # Unidade Demandante (O Dono do Problema)
+        unidade_demandante = st.text_input("Unidade Demandante", placeholder="Ex: Depto. de Comunicação e Marketing")
+        st.caption("A área que possui a necessidade e receberá o objeto/serviço.")
         dados['unidade_demandante'] = unidade_demandante
 
     with col_req:
-        # Lógica da Unidade Requisitante
-        tem_requisitante = st.checkbox("Existe Unidade Requisitante?")
+        # Lógica da Unidade Requisitante (O Técnico/Intermediário)
+        tem_requisitante = st.checkbox("Incluir Unidade Requisitante Intermediária?")
         
         if tem_requisitante:
-            # Caixa de explicação (Expander ou Info)
-            with st.expander("ℹ️ O que é Unidade Requisitante?", expanded=True):
+            # Caixa de explicação mais profissional e bonita
+            with st.expander("💡 Entenda a diferença (Demandante x Requisitante)", expanded=True):
                 st.markdown("""
-                É quando um departamento solicita a compra **em nome de outro** ou para um trâmite específico.
+                Preencha apenas se houver uma área técnica intermediando o pedido.
                 
-                *Exemplo: O Depto de Comunicação quer enviar um livro, mas pede para a **Gestão Documental** fazer o trâmite.*
+                * 🏢 **Unidade Demandante:** É a "dona" da necessidade. Quem vai usufruir do bem ou serviço.
+                * ⚙️ **Unidade Requisitante:** É a área técnica ou administrativa que formaliza e operacionaliza o pedido em nome da Demandante.
+                
+                **Exemplo Prático:**
+                A *Comunicação* (Demandante) precisa enviar brindes, mas quem operacionaliza o contrato de Correios é a *Gestão Documental* (Requisitante).
                 """)
             
-            unidade_requisitante = st.text_input("Nome da Unidade Requisitante", placeholder="Ex: Coordenação de Gestão Documental")
+            unidade_requisitante = st.text_input("Nome da Unidade Requisitante", placeholder="Ex: Coord. de Gestão Documental")
             dados['unidade_requisitante'] = unidade_requisitante
             dados['tem_requisitante'] = True
         else:
